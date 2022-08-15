@@ -1,5 +1,4 @@
 require('dotenv').config();
-console.log(process.env);
 
 var createError = require('http-errors');
 var express = require('express');
@@ -10,7 +9,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/users.routes');
+var questionsRouter = require('./routes/questions.routes');
 
 var app = express();
 
