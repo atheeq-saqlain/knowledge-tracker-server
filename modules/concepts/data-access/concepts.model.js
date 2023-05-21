@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ConceptSchema = new Schema({
@@ -10,18 +10,12 @@ const ConceptSchema = new Schema({
     type: String,
     required: true,
   },
-  questions: [
-    {
-      type: Schema.ObjectId,
-      ref: "Question",
-    },
-  ],
   preRequisitConcepts: [
     {
       type: Schema.ObjectId,
-      ref: "Concept",
+      ref: 'Concept',
     },
   ],
 });
 
-module.exports = mongoose.model("Concept", ConceptSchema);
+module.exports = mongoose.model('Concept', ConceptSchema);

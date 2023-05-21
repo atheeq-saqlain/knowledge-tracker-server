@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Concept = require('../models/concepts.model');
+const Concept = require('../data-access/concepts.model');
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
