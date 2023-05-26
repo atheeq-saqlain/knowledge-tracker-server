@@ -9,8 +9,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./modules/users/controller/users.routes');
+var conceptsRouter = require('./modules/concepts/controller/concepts.routes');
 var questionsRouter = require('./modules/questions/controller/questions.routes');
+var syllabusRouter = require('./modules/syllabus/controller/syllabus.routes');
+var usersRouter = require('./modules/users/controller/users.routes');
 
 var app = express();
 
@@ -35,8 +37,10 @@ app.use(cors());
 
 // initialize routers
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/concepts', conceptsRouter);
 app.use('/questions', questionsRouter);
+app.use('/syllabus', syllabusRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

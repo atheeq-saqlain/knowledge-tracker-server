@@ -10,6 +10,10 @@ const ConceptSchema = new Schema({
     type: String,
     required: true,
   },
+  subject: {
+    type: String,
+    require: true,
+  },
   preRequisitConcepts: [
     {
       type: Schema.ObjectId,
