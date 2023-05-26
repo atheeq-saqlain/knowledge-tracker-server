@@ -12,7 +12,7 @@ const ConceptSchema = new Schema({
   },
   subject: {
     type: String,
-    require: true,
+    required: true,
   },
   preRequisitConcepts: [
     {
