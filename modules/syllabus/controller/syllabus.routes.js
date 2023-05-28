@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
+const SyllabusController = require('./syllabus.controller');
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.send('response');
-});
+router
+  .route('/')
+  .get(SyllabusController.getSyllabus)
+  .post(SyllabusController.create);
+
+router
+  .route('/:id')
+  .get(SyllabusController.getSyllabusById)
+  .put(SyllabusController.updateSyllabus)
+  .delete(SyllabusController.deleteSyllabus);
 
 module.exports = router;

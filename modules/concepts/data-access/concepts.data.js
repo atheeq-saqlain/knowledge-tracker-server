@@ -19,9 +19,9 @@ exports.findConceptById = async function (id) {
 
 // update
 exports.updateConcept = async function (id, updatedConcept) {
-  console.log('updating concept : ', id, updatedConcept);
-  let cpt = await conceptsModel.findByIdAndUpdate(id, updatedConcept);
-  console.log('updated concept : ', cpt);
+  let cpt = await conceptsModel.findByIdAndUpdate(id, updatedConcept, {
+    new: true,
+  });
   return cpt;
 };
 

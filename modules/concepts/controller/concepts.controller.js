@@ -20,7 +20,6 @@ exports.getConceptById = async function (req, res, next) {
 
 exports.updateConcept = async function (req, res, next) {
   try {
-    console.log('rq body : ', req.body);
     let updatedConcept = await ConceptService.updateConcept(
       req.params.id,
       req.body

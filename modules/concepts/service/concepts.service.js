@@ -14,11 +14,9 @@ exports.findConceptById = async function (id) {
 };
 
 exports.updateConcept = async function (conceptId, updatedObj) {
-  console.log('controller : ', updatedObj);
   return await conceptDb.updateConcept(conceptId, updatedObj);
 };
 
 exports.deleteConcept = async function (conceptId) {
-  console.log('deleting concept : ', conceptId);
   return await conceptDb.deleteConcept(conceptId);
 };
