@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var conceptsRouter = require('./modules/concepts/controller/concepts.routes');
 var questionsRouter = require('./modules/questions/controller/questions.routes');
 var syllabusRouter = require('./modules/syllabus/controller/syllabus.routes');
+var educationBoardRouter = require('./modules/educationBoard/controller/educationBoard.routes');
 var usersRouter = require('./modules/users/controller/users.routes');
 
 var app = express();
@@ -40,6 +41,7 @@ app.use('/', indexRouter);
 app.use('/concepts', conceptsRouter);
 app.use('/questions', questionsRouter);
 app.use('/syllabus', syllabusRouter);
+app.use('/education-board', educationBoardRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

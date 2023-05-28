@@ -18,7 +18,8 @@ const SyllabusSchema = new Schema({
     required: true,
   },
   educationBoard: {
-    type: String,
+    type: Schema.ObjectId,
+    ref: 'EducationBoard',
     required: true,
   },
   subject: {

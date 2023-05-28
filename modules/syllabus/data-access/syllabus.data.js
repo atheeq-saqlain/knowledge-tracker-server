@@ -11,7 +11,7 @@ exports.listAllSyllabus = async function () {
 };
 
 exports.findSyllabusById = async function (id) {
-  return await syllabusModel.findById(id);
+  return await syllabusModel.findById(id).populate('educationBoard');
 };
 
 // update
