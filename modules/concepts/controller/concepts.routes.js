@@ -13,4 +13,6 @@ router
   .put(ConceptController.updateConcept)
   .delete(ConceptController.deleteConcept);
 
+router.route('/search/:searchString').get(ConceptController.searchConcept);
+
 module.exports = router;

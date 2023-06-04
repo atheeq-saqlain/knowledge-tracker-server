@@ -13,6 +13,11 @@ exports.getConcepts = async function (req, res, next) {
   res.status(200).json(concepts);
 };
 
+exports.searchConcept = async function (req, res, next) {
+  let concepts = await ConceptService.searchConcept(req.params.searchString);
+  res.status(200).json(concepts);
+};
+
 exports.getConceptById = async function (req, res, next) {
   let concept = await ConceptService.findConceptById(req.params.id);
   res.status(200).json(concept);

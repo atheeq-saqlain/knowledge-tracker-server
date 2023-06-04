@@ -13,6 +13,13 @@ exports.listAllConcepts = async function () {
   return await conceptsModel.find();
 };
 
+exports.searchConcept = async function (searchText) {
+  // search for concept
+  return await conceptsModel.find({
+    name: { $regex: searchText, $options: 'i' },
+  });
+};
+
 exports.findConceptById = async function (id) {
   return await conceptsModel.findById(id);
 };

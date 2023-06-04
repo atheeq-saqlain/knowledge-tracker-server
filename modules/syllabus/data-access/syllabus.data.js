@@ -11,14 +11,22 @@ exports.listAllSyllabus = async function () {
 };
 
 exports.findSyllabusById = async function (id) {
-  return await syllabusModel.findById(id).populate('educationBoard');
+  return await syllabusModel
+    .findById(id)
+    .populate('educationBoard')
+    .populate('chapters.sections.concepts')
+    .populate('chapters.sections.questions');
 };
 
 // update
 exports.updateSyllabus = async function (id, updatedSyllabus) {
-  let cpt = await syllabusModel.findByIdAndUpdate(id, updatedSyllabus, {
-    new: true,
-  });
+  let cpt = await syllabusModel
+    .findByIdAndUpdate(id, updatedSyllabus, {
+      new: true,
+    })
+    .populate('educationBoard')
+    .populate('chapters.sections.concepts')
+    .populate('chapters.sections.questions');
   return cpt;
 };
 

@@ -9,6 +9,10 @@ exports.listAllConcepts = async function () {
   return await conceptDb.listAllConcepts();
 };
 
+exports.searchConcept = async function (str) {
+  return await conceptDb.searchConcept(str);
+};
+
 exports.findConceptById = async function (id) {
   return await conceptDb.findConceptById(id);
 };
