@@ -13,21 +13,10 @@ const questionSchema = new Schema({
   questionType: {
     type: String,
   },
-
-  //which grade or class is this question for [8th grade, 9th, 10th]
-  grade: [
-    {
-      type: String,
-    },
-  ],
-  //which syllabus does has this question [icse, cbse, state ... etc] or exam[jee, neet etc]
-  //should refer to the syllabus - array tags
-  educationalBoard: [
-    {
-      type: String,
-    },
-  ],
-
+  syllabus: {
+    type: Schema.ObjectId,
+    ref: 'Syllabus',
+  },
   coreConcept: {
     type: Schema.ObjectId,
     ref: 'Concept',
