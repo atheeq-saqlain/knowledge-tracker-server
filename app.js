@@ -14,6 +14,8 @@ var questionsRouter = require('./modules/questions/controller/questions.routes')
 var syllabusRouter = require('./modules/syllabus/controller/syllabus.routes');
 var educationBoardRouter = require('./modules/educationBoard/controller/educationBoard.routes');
 var usersRouter = require('./modules/users/controller/users.routes');
+var institutesRouter = require('./modules/institute/controller/institutes.routes');
+var studentsRouter = require('./modules/students/controller/students.routes');
 
 var app = express();
 
@@ -43,6 +45,8 @@ app.use('/questions', questionsRouter);
 app.use('/syllabus', syllabusRouter);
 app.use('/education-board', educationBoardRouter);
 app.use('/users', usersRouter);
+app.use('/institutes', institutesRouter);
+app.use('/students', studentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
