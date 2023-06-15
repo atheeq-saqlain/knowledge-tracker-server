@@ -7,6 +7,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passport = require('passport');
+const session = require('express-session');
+const LocalStrategy = require('passport-local').Strategy;
+const MongoStore = require('connect-mongo');
+const usersData = require('./modules/users/data-access/user.data');
 
 var indexRouter = require('./routes/index');
 var conceptsRouter = require('./modules/concepts/controller/concepts.routes');
@@ -29,6 +34,52 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   // we're connected!
   console.log('Connected to Mongodb');
+});
+
+db.getClient();
+
+// init authentication
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      client: db.getClient(),
+      collectionName: 'sessions',
+    }),
+  })
+);
+// This is the basic express session({..}) initialization.
+app.use(passport.initialize());
+// init passport on every route call.
+app.use(passport.session());
+// allow passport to use "express-session".
+
+const authUser = async (username, password, done) => {
+  console.log(`Value of "User" in authUser function ----> ${username}`); //passport will populate, user = req.body.username
+  console.log(`Value of "Password" in authUser function ----> ${password}`); //passport will popuplate, password = req.body.password
+
+  let user = await usersData.findByUserName(username);
+  if (!user) return done(null, false, { message: 'User not found' });
+  else if (user.password != password)
+    return done(null, false, { message: 'Invalid password' });
+
+  //Search the user, password in the DB to authenticate the user
+  //Let's assume that a search within your DB returned the username and password match for "Kyle".
+  let authenticated_user = user;
+  return done(null, authenticated_user);
+};
+
+passport.use(new LocalStrategy(authUser));
+// The "authUser" is a function that we will define later will contain the steps to authenticate a user, and will return the "authenticated user".
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 app.use(logger('dev'));

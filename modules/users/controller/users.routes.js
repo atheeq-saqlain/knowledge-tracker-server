@@ -1,15 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../data-access/users.model');
+const Auth = require('../service/users.auth.service');
+const userController = require('./users.controller');
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+// authentication routes
+router.route('/login').post(Auth.login);
+router.route('/logout').delete(Auth.logout);
 
-//add student user
-router.post('/', async (req, res, next) => {
-  newUser = await newUser.save();
-});
+// crud routes
+router.route('/').post(userController.createUser).get(userController.list);
 
 module.exports = router;

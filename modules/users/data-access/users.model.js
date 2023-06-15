@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -10,47 +10,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  studentProfile: {
-    currentGrade: {
-      type: String,
-    },
-    teachers: [
-      {
-        type: Schema.ObjectId,
-        ref: "User",
-      },
-    ],
-    syllabus: {},
-    assgnments: [{}],
-    exams: [],
-    concepts: [
-      {
-        conceptId: {
-          type: Schema.ObjectId,
-          ref: "Concept",
-        },
-        //metrics to judge the srength of the concept and other meta data
-      },
-    ],
-    solvedQuestions: [
-      //array containing the objects of each question
-      {
-        questionId: {
-          type: Schema.ObjectId,
-          ref: "Question",
-        },
-        // other metrics of performance and other meta data
-      },
-    ],
-  },
+  // add roles
   teacherProfile: {
     studentList: [
       {
         type: Schema.ObjectId,
-        ref: "User",
+        ref: 'User',
       },
     ],
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);
