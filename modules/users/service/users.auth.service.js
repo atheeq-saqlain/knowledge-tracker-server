@@ -1,3 +1,5 @@
+// TODO: move the express related part to middelware and keep the logic here
+
 const passport = require('passport');
 
 exports.login = function (req, res, next) {
