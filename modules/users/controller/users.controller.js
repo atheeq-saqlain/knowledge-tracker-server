@@ -18,3 +18,11 @@ exports.list = async function (req, res, next) {
   let users = await UserCrud.listUsers();
   res.status(200).jsonp(users);
 };
+
+exports.getLoggedInUser = async function (req, res, next) {
+  if (req.user) {
+    res.status(200).jsonp(req.user);
+  } else {
+    res.status(404).jsonp({ message: 'user not found' });
+  }
+};

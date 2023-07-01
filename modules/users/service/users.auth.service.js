@@ -13,7 +13,7 @@ exports.login = function (req, res, next) {
     }
     req.login(user, (error) => {
       if (error) throw error;
-      res.status(200).send('authenticated');
+      res.status(200).jsonp(user);
     });
   })(req, res, next);
 };
