@@ -10,19 +10,19 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  // add roles
   roles: [
     {
       type: String,
-      enum: ['admin', 'teacher', 'institute-admin'],
+      enum: ['admin', 'content-moderator', 'teacher', 'institute-admin'],
     },
   ],
+  // institute : for teacher and institute-admmin
   institute: {
     type: Schema.ObjectId,
     ref: 'Institute',
   },
-  // syllabus taught by the teacher
-  syllabuses: [
+  // syllabus taught by the teacher | syllabus assigned to the content moderator
+  syllabi: [
     {
       type: Schema.ObjectId,
       ref: 'Syllabus',
