@@ -25,4 +25,6 @@ router
     userController.list
   );
 
+router.route('/loggedin').get(isAuthenticated, userController.getLoggedInUser);
+
 module.exports = router;
