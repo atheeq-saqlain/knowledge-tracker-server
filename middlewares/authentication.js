@@ -12,9 +12,12 @@ exports.isAuthenticated = function (req, res, next) {
 
 exports.isAuthorized = function (roles) {
   return (req, res, next) => {
-    console.log('checking for roles ... : ', roles);
-    console.log('user to authorize : ', req.user);
-    return next();
+    for (const userRole of req.user.roles) {
+      if (roles.includes(userRole)) {
+        return next();
+      }
+    }
+    res.status(403).send('Unauthorized');
   };
 };
 

@@ -2,16 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 const InstitutesController = require('./institutes.controller');
+const { isAuthenticated, isAuthorized } = require('../../../middlewares/authentication');
 
 router
   .route('/')
-  .get(InstitutesController.getInstitutes)
-  .post(InstitutesController.create);
+  .get(isAuthenticated, isAuthorized(['admin']), InstitutesController.getInstitutes)
+  .post(isAuthenticated, isAuthorized(['admin']), InstitutesController.create);
 
 router
   .route('/:id')
-  .get(InstitutesController.getInstituteById)
-  .put(InstitutesController.updateInstitute)
-  .delete(InstitutesController.deleteInstitute);
+  .get(isAuthenticated, isAuthorized(['admin', 'institute-admin']), InstitutesController.getInstituteById)
+  .put(isAuthenticated, isAuthorized(['admin']), InstitutesController.updateInstitute)
+  .delete(isAuthenticated, isAuthorized(['admin']), InstitutesController.deleteInstitute);
 
 module.exports = router;
