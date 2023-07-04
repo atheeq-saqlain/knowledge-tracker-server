@@ -8,13 +8,11 @@ exports.createUser = async function (req, res, next) {
 };
 
 exports.createAdmin = async function (req, res, next) {
-  console.log('creating admin user ...');
   let user = await UserCrud.createAdminUser();
   res.status(200).jsonp(user);
 };
 
 exports.list = async function (req, res, next) {
-  console.log('req user check ... ', req.user);
   let users = await UserCrud.listUsers();
   res.status(200).jsonp(users);
 };
@@ -25,4 +23,19 @@ exports.getLoggedInUser = async function (req, res, next) {
   } else {
     res.status(404).jsonp({ message: 'user not found' });
   }
+};
+
+exports.getUserById = async function (req, res, next) {
+  let user = await UserCrud.findUserById(req.params.id);
+  res.status(200).jsonp(user);
+};
+
+exports.updateUser = async function (req, res, next) {
+  let updateUser = await UserCrud.updateUser(req.params.id, req.body);
+  res.status(200).jsonp(updateUser);
+};
+
+exports.deleteUser = async function (req, res, next) {
+  await UserCrud.deleteUser(req.params.id);
+  res.status(200).jsonp({ message: 'User deleted successfuly' });
 };

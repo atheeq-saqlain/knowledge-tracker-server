@@ -16,3 +16,15 @@ exports.createUser = async function (body) {
 exports.listUsers = async function () {
   return await UserData.listUsers();
 };
+
+exports.findUserById = async function (id) {
+  return await UserData.findByUserId(id);
+};
+
+exports.updateUser = async function (id, update) {
+  return await UserData.updateUser(id, update);
+};
+
+exports.deleteUser = async function (id) {
+  return await UserData.deleteUser(id);
+};

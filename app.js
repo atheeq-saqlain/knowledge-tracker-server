@@ -57,13 +57,12 @@ app.use(passport.session());
 // allow passport to use "express-session".
 
 const authUser = async (username, password, done) => {
-  console.log(`Value of "User" in authUser function ----> ${username}`); //passport will populate, user = req.body.username
-  console.log(`Value of "Password" in authUser function ----> ${password}`); //passport will popuplate, password = req.body.password
+  // console.log(`Value of "User" in authUser function ----> ${username}`); //passport will populate, user = req.body.username
+  // console.log(`Value of "Password" in authUser function ----> ${password}`); //passport will popuplate, password = req.body.password
 
   let user = await usersData.findByUserName(username);
   if (!user) return done(null, false, { message: 'User not found' });
-  else if (user.password != password)
-    return done(null, false, { message: 'Invalid password' });
+  else if (user.password != password) return done(null, false, { message: 'Invalid password' });
 
   //Search the user, password in the DB to authenticate the user
   //Let's assume that a search within your DB returned the username and password match for "Kyle".

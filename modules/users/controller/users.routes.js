@@ -17,6 +17,12 @@ router
   .post(isAuthenticated, isAuthorized(['admin']), userController.createUser)
   .get(isAuthenticated, isAuthorized(['admin']), userController.list);
 
+router
+  .route('/:id')
+  .get(isAuthenticated, isAuthorized(['admin']), userController.getUserById)
+  .post(isAuthenticated, isAuthorized(['admin']), userController.updateUser)
+  .delete(isAuthenticated, isAuthorized(['admin']), userController.deleteUser);
+
 router.route('/loggedin').get(isAuthenticated, userController.getLoggedInUser);
 
 module.exports = router;
