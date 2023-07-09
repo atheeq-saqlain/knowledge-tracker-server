@@ -23,6 +23,6 @@ router
   .post(isAuthenticated, isAuthorized(['admin']), userController.updateUser)
   .delete(isAuthenticated, isAuthorized(['admin']), userController.deleteUser);
 
-router.route('/loggedin').get(isAuthenticated, userController.getLoggedInUser);
+router.route('/check/loggedin').get(isAuthenticated, userController.getLoggedInUser);
 
 module.exports = router;
