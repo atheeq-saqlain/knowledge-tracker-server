@@ -9,18 +9,17 @@ const Schema = mongoose.Schema;
 const SyllabusSchema = new Schema({
   name: {
     type: String,
+    required: true,
   },
   description: {
     type: String,
   },
   grade: {
     type: String,
-    required: true,
   },
   educationBoard: {
     type: Schema.ObjectId,
     ref: 'EducationBoard',
-    required: true,
   },
   subject: {
     type: String,
