@@ -29,8 +29,6 @@ exports.getSubjectById = async function (req, res, next) {
 
 exports.searchSubjects = async function (req, res, next) {
   try {
-    console.log('inside search');
-    console.log(req.params.searchString);
     let subjects = await SubjectService.searchSubject(req.params.searchString);
     res.status(200).jsonp(subjects);
   } catch (err) {
