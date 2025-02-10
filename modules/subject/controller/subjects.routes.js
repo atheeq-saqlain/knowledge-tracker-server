@@ -22,4 +22,12 @@ router
   .put(isAuthenticated, isAuthorized(['admin', 'content-moderator']), SubjectsController.updateSubject)
   .delete(isAuthenticated, isAuthorized(['admin']), SubjectsController.deleteSubject);
 
+router
+  .route('/search/:searchString')
+  .get(
+    isAuthenticated,
+    isAuthorized(['admin', 'content-moderator', 'teacher', 'institute-admin']),
+    SubjectsController.searchSubjects
+  );
+
 module.exports = router;

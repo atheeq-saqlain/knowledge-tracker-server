@@ -1,4 +1,4 @@
-SubjectService = require('../service/subjects.service');
+const SubjectService = require('../service/subjects.service');
 
 exports.listAllSubjects = async function (req, res, next) {
   try {
@@ -22,6 +22,17 @@ exports.getSubjectById = async function (req, res, next) {
   try {
     let subject = await SubjectService.getSubjectById(req.params.id);
     res.status(200).jsonp(subject);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.searchSubjects = async function (req, res, next) {
+  try {
+    console.log('inside search');
+    console.log(req.params.searchString);
+    let subjects = await SubjectService.searchSubject(req.params.searchString);
+    res.status(200).jsonp(subjects);
   } catch (err) {
     next(err);
   }

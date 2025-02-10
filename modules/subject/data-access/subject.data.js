@@ -18,6 +18,12 @@ exports.getSubjectByName = async function (name) {
   return await subjectModel.findOne({ name });
 };
 
+exports.searchSubjects = async function (searchText) {
+  return await subjectModel.find({
+    name: { $regex: searchText, $options: 'i' },
+  });
+};
+
 // updating
 exports.updateSubject = async function (id, update) {
   return await subjectModel.findByIdAndUpdate(id, update, { new: true });
