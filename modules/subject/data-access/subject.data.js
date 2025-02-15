@@ -10,8 +10,16 @@ exports.listAllSubjects = async function () {
   return await subjectModel.find();
 };
 
+exports.listRootSubjects = async function () {
+  return await subjectModel.find({ parentSubject: null });
+};
+
 exports.getSubjectById = async function (id) {
   return await subjectModel.findById(id);
+};
+
+exports.getSubjectsByParent = async function (parentId) {
+  return await subjectModel.find({ parentSubject: parentId });
 };
 
 exports.getSubjectByName = async function (name) {

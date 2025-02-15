@@ -1,8 +1,13 @@
 const SubjectService = require('../service/subjects.service');
 
-exports.listAllSubjects = async function (req, res, next) {
+exports.listSubjects = async function (req, res, next) {
   try {
-    let subjects = await SubjectService.listAllSubjects();
+    let subjects = [];
+    if (req.query.rootonly === 'true') {
+      subjects = await SubjectService.listRootSubjects();
+    } else {
+      subjects = await SubjectService.listAllSubjects();
+    }
     res.status(200).jsonp(subjects);
   } catch (err) {
     next(err);
@@ -22,6 +27,15 @@ exports.getSubjectById = async function (req, res, next) {
   try {
     let subject = await SubjectService.getSubjectById(req.params.id);
     res.status(200).jsonp(subject);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getSubjectsByParent = async function (req, res, next) {
+  try {
+    let subjects = await SubjectService.getSubjectsByParent(req.params.parentId);
+    res.status(200).jsonp(subjects);
   } catch (err) {
     next(err);
   }

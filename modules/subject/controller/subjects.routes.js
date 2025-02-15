@@ -8,7 +8,7 @@ router
   .get(
     isAuthenticated,
     isAuthorized(['admin', 'content-moderator', 'teacher', 'institute-admin']),
-    SubjectsController.listAllSubjects
+    SubjectsController.listSubjects
   )
   .post(isAuthenticated, isAuthorized(['admin', 'content-moderator']), SubjectsController.createSubject);
 
@@ -28,6 +28,14 @@ router
     isAuthenticated,
     isAuthorized(['admin', 'content-moderator', 'teacher', 'institute-admin']),
     SubjectsController.searchSubjects
+  );
+
+router
+  .route('/children/:parentId')
+  .get(
+    isAuthenticated,
+    isAuthorized(['admin', 'content-moderator', 'teacher', 'institute-admin']),
+    SubjectsController.getSubjectsByParent
   );
 
 module.exports = router;

@@ -8,17 +8,14 @@ const SubjectSchema = new Schema({
   },
   definition: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
   },
-  subFields: [
-    {
-      type: Schema.ObjectId,
-      ref: 'Subject',
-    },
-  ],
+  parentSubject: {
+    type: Schema.ObjectId,
+    ref: 'Subject',
+  },
   concepts: [
     {
       type: Schema.ObjectId,
