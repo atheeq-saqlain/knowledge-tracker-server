@@ -8,6 +8,14 @@ router
   .get(isAuthenticated, isAuthorized(['admin']), StudentsController.getStudents)
   .post(isAuthenticated, isAuthorized(['admin', 'institute-admin']), StudentsController.create);
 
+// TODO: Add api to search students
+// router.route('/search/:searchString').get(isAuthenticated, isAuthorized(['admin']), StudentsController.searchStudents);
+
+router
+  .route('/user/:userId')
+  .get(isAuthenticated, StudentsController.getStudentByUserProfile)
+  .post(isAuthenticated, StudentsController.createStudentFromUser);
+
 // TODO: Add api to get students by institute
 // TODO: Add api to get students by assigned teacher
 

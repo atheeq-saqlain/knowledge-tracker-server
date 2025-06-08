@@ -14,6 +14,10 @@ exports.findStudentById = async function (id) {
   return await studentsModel.findById(id);
 };
 
+exports.findStudentByUserProfile = async function (user) {
+  return await studentsModel.findOne({ user: user }).populate('subjects');
+};
+
 // update
 exports.updateStudent = async function (id, updatedStudent) {
   let student = await studentsModel.findByIdAndUpdate(id, updatedStudent, {

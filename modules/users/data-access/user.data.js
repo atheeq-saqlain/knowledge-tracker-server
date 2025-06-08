@@ -9,11 +9,11 @@ exports.listUsers = async function () {
 };
 
 exports.findByUserName = async function (username) {
-  return await usersModel.findOne({ userName: username });
+  return await usersModel.findOne({ userName: username }).populate('student.subjects');
 };
 
 exports.findByUserId = async function (id) {
-  return await usersModel.findById(id);
+  return await usersModel.findById(id).populate('student.subjects');
 };
 
 exports.updateUser = async function (id, update) {

@@ -1,4 +1,5 @@
 const subjectModel = require('./subject.model');
+const mongoose = require('mongoose');
 
 // creating
 exports.createSubject = async function (subject) {
@@ -19,7 +20,7 @@ exports.getSubjectById = async function (id) {
 };
 
 exports.getSubjectsByParent = async function (parentId) {
-  return await subjectModel.find({ parentSubject: parentId });
+  return await subjectModel.find({ parentSubject: parentId }).populate('concepts');
 };
 
 exports.getSubjectByName = async function (name) {
@@ -40,4 +41,22 @@ exports.updateSubject = async function (id, update) {
 // deleting
 exports.deleteSubject = async function (id) {
   return await subjectModel.findByIdAndRemove(id);
+};
+
+exports.getSubjectHierarchy = async (subjectId) => {
+  const subjectHierarchy = await subjectModel.aggregate([
+    { $match: { _id: mongoose.Types.ObjectId(subjectId) } },
+    {
+      $graphLookup: {
+        from: 'subjects',
+        startWith: '$_id',
+        connectFromField: '_id',
+        connectToField: 'parentSubject',
+        as: 'hierarchy',
+        depthField: 'level',
+      },
+    },
+  ]);
+
+  return subjectHierarchy;
 };

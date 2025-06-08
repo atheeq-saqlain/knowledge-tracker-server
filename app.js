@@ -22,6 +22,7 @@ var usersRouter = require('./modules/users/controller/users.routes');
 var institutesRouter = require('./modules/institute/controller/institutes.routes');
 var studentsRouter = require('./modules/students/controller/students.routes');
 var subjectsRouter = require('./modules/subject/controller/subjects.routes');
+var conceptsTrackerRouter = require('./modules/conceptTracker/controller/conceptsTracker.routes');
 
 var app = express();
 
@@ -105,6 +106,7 @@ app.use('/users', usersRouter);
 app.use('/institutes', institutesRouter);
 app.use('/students', studentsRouter);
 app.use('/subjects', subjectsRouter);
+app.use('/concepts-tracker', conceptsTrackerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

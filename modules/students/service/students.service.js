@@ -12,6 +12,10 @@ exports.findStudentById = async function (id) {
   return await studentsDB.findStudentById(id);
 };
 
+exports.findStudentByUserProfile = async function (user) {
+  return await studentsDB.findStudentByUserProfile(user);
+};
+
 exports.updateStudent = async function (studentId, updatedObj) {
   return await studentsDB.updateStudent(studentId, updatedObj);
 };
