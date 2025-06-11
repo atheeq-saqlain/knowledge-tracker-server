@@ -30,11 +30,6 @@ exports.deleteConceptTracker = async function (conceptId) {
 // Progress tracking functionality
 exports.getProgress = async function (studentId, subjectId) {
   let subjectsLookup = (await subjectDb.getSubjectHierarchy(subjectId))[0];
-  // console.log('subjectsLookup', JSON.stringify(subjectsLookup, null, 2));
-  if (!subjectsLookup.hierarchy.length) {
-    let subjectMastery = await calculateConceptMasteryForSubject(subjectsLookup);
-    return subjectMastery;
-  }
 
   let subjectTree = buildSubjectTree(subjectsLookup);
 
@@ -45,7 +40,7 @@ exports.getProgress = async function (studentId, subjectId) {
 
 const calculateConceptMasteryForSubject = async function (subject, studentId) {
   let mastery = 0;
-  if (!subject.concepts.length) {
+  if (!(subject.concepts && subject.concepts.length)) {
     return 0;
   }
   for (let i = 0; i < subject.concepts.length; i++) {
@@ -54,7 +49,7 @@ const calculateConceptMasteryForSubject = async function (subject, studentId) {
       mastery += conceptTracker.masteryLevel;
     }
   }
-  let avgMastery = mastery / subject.concepts.length;
+  let avgMastery = (mastery / (subject.concepts.length * 5)) * 100;
   return avgMastery;
 };
 

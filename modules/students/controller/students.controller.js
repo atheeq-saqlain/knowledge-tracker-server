@@ -1,5 +1,6 @@
 const StudentService = require('../service/students.service');
 const UserService = require('../../users/service/user.crud.service');
+const ConceptTrackerService = require('../../conceptTracker/service/conceptTracker.service');
 
 exports.create = async function (req, res, next) {
   // add validation for this
@@ -11,7 +12,17 @@ exports.create = async function (req, res, next) {
 exports.getStudentByUserProfile = async function (req, res, next) {
   try {
     let student = await StudentService.findStudentByUserProfile(req.params.userId);
-    return res.status(200).json(student);
+    let progressPromises = [];
+    student.subjects.forEach((subjectId) => {
+      progressPromises.push(ConceptTrackerService.getProgress(student._id, subjectId));
+    });
+
+    let studentProgress = await Promise.all(
+      student.subjects.map(async (subject) => {
+        return await ConceptTrackerService.getProgress(student._id, subject);
+      })
+    );
+    return res.status(200).json({ studentDetails: student, studentProgress: studentProgress });
   } catch (error) {
     return next(error);
   }
