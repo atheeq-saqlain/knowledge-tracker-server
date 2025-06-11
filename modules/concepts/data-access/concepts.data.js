@@ -21,7 +21,7 @@ exports.searchConcept = async function (searchText) {
 };
 
 exports.findConceptById = async function (id) {
-  return await conceptsModel.findById(id).populate('preRequisitConcepts');
+  return await conceptsModel.findById(id).populate('preRequisitConcepts').populate('subjects');
 };
 
 // update

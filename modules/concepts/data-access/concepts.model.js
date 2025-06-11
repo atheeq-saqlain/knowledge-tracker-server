@@ -13,6 +13,12 @@ const ConceptSchema = new Schema({
   description: {
     type: String,
   },
+  subjects: [
+    {
+      type: Schema.ObjectId,
+      ref: 'Subject',
+    },
+  ],
   preRequisitConcepts: [
     {
       type: Schema.ObjectId,
