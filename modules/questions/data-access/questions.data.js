@@ -7,11 +7,11 @@ exports.addQestion = async function (question) {
 
 // reading
 exports.listAllQuestions = async function () {
-  return await questionsModel.find();
+  return await questionsModel.find().sort({ createdAt: -1 });
 };
 
 exports.findQuestionById = async function (id) {
-  return await questionsModel.findById(id);
+  return await questionsModel.findById(id).populate('subject');
 };
 
 // update
