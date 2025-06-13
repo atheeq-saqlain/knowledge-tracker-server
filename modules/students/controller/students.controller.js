@@ -12,11 +12,6 @@ exports.create = async function (req, res, next) {
 exports.getStudentByUserProfile = async function (req, res, next) {
   try {
     let student = await StudentService.findStudentByUserProfile(req.params.userId);
-    let progressPromises = [];
-    student.subjects.forEach((subjectId) => {
-      progressPromises.push(ConceptTrackerService.getProgress(student._id, subjectId));
-    });
-
     let studentProgress = await Promise.all(
       student.subjects.map(async (subject) => {
         return await ConceptTrackerService.getProgress(student._id, subject);
